@@ -2,7 +2,10 @@
 
 import React, { createContext, useContext, useEffect, useMemo, useState, useCallback, useSyncExternalStore } from "react";
 
-export type User = { id: number; name: string; email: string; role: string; phone?: string | null; city?: string | null };
+export type User = {
+  id: number; name: string; email: string; role: string; phone?: string | null; city?: string | null;
+  mustChangePassword?: boolean;
+};
 export type ProductLite = {
   id: number; name: string; slug: string; price: number; compareAtPrice?: number | null;
   images: string[]; stock: number; ratingAvg?: number; ratingCount?: number; shortDescription?: string | null; store?: string;
@@ -13,7 +16,7 @@ export type Toast = { id: number; title: string; message?: string; type: "succes
 type ShopCtx = {
   user: User | null;
   authLoading: boolean;
-  login: (email: string, password: string) => Promise<{ ok: boolean; error?: string }>;
+  login: (email: string, password: string) => Promise<{ ok: boolean; error?: string; mustChangePassword?: boolean }>;
   register: (data: { name: string; email: string; password: string; phone?: string }) => Promise<{ ok: boolean; error?: string }>;
   logout: () => Promise<void>;
   refreshUser: () => Promise<void>;
@@ -169,7 +172,7 @@ export function ShopProvider({ children }: { children: React.ReactNode }) {
     if (!r.ok) return { ok: false, error: j.error || "Login failed" };
     setUser(j.user);
     toast("Welcome back!", { message: `Signed in as ${j.user.name}`, type: "success" });
-    return { ok: true };
+    return { ok: true, mustChangePassword: j.user.mustChangePassword };
   };
 
   const register = async (data: { name: string; email: string; password: string; phone?: string }) => {
@@ -177,7 +180,7 @@ export function ShopProvider({ children }: { children: React.ReactNode }) {
     const j = await r.json();
     if (!r.ok) return { ok: false, error: j.error || "Registration failed" };
     setUser(j.user);
-    toast("Account created!", { message: "Welcome to Donwise 🎉", type: "success" });
+    toast("Account created!", { message: "Welcome to Luicie.space 🎉", type: "success" });
     return { ok: true };
   };
 

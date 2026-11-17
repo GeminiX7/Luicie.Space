@@ -24,9 +24,11 @@ export async function POST(req: NextRequest) {
       email: email.toLowerCase().trim(),
       passwordHash,
       phone: phone || null,
+      city: "Enugu",
+      state: "Enugu",
       role: "customer",
     }).returning();
-    await setSessionCookie({ id: user.id, email: user.email, role: user.role, name: user.name });
+    await setSessionCookie({ id: user.id, email: user.email, role: user.role, name: user.name, authVersion: user.authVersion });
     return NextResponse.json({
       user: { id: user.id, name: user.name, email: user.email, role: user.role, phone: user.phone },
     }, { status: 201 });

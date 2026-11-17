@@ -1,14 +1,9 @@
 export const SITE = {
-  name: "Donwise",
-  fullName: "Donwise Computers & iPhone Stores",
-  tagline: "Owerri's No.1 Plug for Computers, iPhones, Games & Gadgets",
-  address: "12 Douglas Road, Owerri, Imo State",
-  address2: "Shop B14 Somachi Plaza, Ikenegbu, Owerri",
-  phone: "+234 803 123 4567",
-  phone2: "+234 905 987 6543",
-  email: "hello@donwise.ng",
-  supportEmail: "support@donwise.ng",
-  hours: "Mon – Sat: 8:00am – 8:00pm",
+  name: "Luicie.space",
+  fullName: "Luicie.space",
+  tagline: "Always At Your Service.",
+  address: "Enugu, Nigeria",
+  phone: "0813788842",
   freeShippingThreshold: 250000,
 };
 

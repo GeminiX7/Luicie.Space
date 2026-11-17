@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { MapPin, Phone, Mail, Clock, Send } from "lucide-react";
+import { MapPin, Phone, Send } from "lucide-react";
 import { Input, Textarea, Button } from "@/components/ui";
 import { useShop } from "@/context/ShopContext";
 import { SITE } from "@/lib/constants";
@@ -17,22 +17,20 @@ export default function ContactPage() {
     setTimeout(() => {
       setSending(false);
       setForm({ name: "", email: "", subject: "", message: "" });
-      toast("Message sent!", { message: "We'll get back to you within 24 hours." });
+      toast("Message sent!", { message: "Thank you for contacting Luicie.Space." });
     }, 900);
   };
 
   return (
     <div className="mx-auto max-w-7xl px-4 py-10">
       <h1 className="text-2xl font-black text-slate-900 sm:text-3xl">Contact Us</h1>
-      <p className="mt-1 text-sm text-slate-500">Questions about a product, order or warranty? We&apos;d love to hear from you.</p>
+      <p className="mt-1 text-sm text-slate-500">Need anything today? We&apos;re just one click away.</p>
 
       <div className="mt-6 grid gap-5 lg:grid-cols-[380px_1fr]">
         <div className="space-y-3">
           {[
-            { icon: MapPin, t: "Visit Our Stores", s: `${SITE.address}\n${SITE.address2}` },
-            { icon: Phone, t: "Call Us", s: `${SITE.phone}\n${SITE.phone2}` },
-            { icon: Mail, t: "Email Us", s: `${SITE.email}\n${SITE.supportEmail}` },
-            { icon: Clock, t: "Opening Hours", s: `${SITE.hours}\nSunday: Closed` },
+            { icon: MapPin, t: "Location", s: SITE.address },
+            { icon: Phone, t: "Call Us", s: SITE.phone },
           ].map((c) => (
             <div key={c.t} className="flex gap-3.5 rounded-2xl border border-slate-100 bg-white p-5">
               <div className="grid h-11 w-11 shrink-0 place-items-center rounded-2xl bg-brand-50 text-brand-600"><c.icon size={19} /></div>

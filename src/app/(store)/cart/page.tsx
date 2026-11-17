@@ -41,7 +41,7 @@ export default function CartPage() {
         <div className="flex items-center gap-2 text-[13px] font-semibold text-slate-700">
           <Truck size={16} className="text-brand-600" />
           {shipping === 0 ? (
-            <span>🎉 You&apos;ve unlocked <b className="text-emerald-600">FREE delivery</b> in Owerri!</span>
+            <span>🎉 You&apos;ve unlocked <b className="text-emerald-600">FREE delivery</b>!</span>
           ) : (
             <span>Add <b className="text-brand-700">{formatNaira(SITE.freeShippingThreshold - cartSubtotal)}</b> more to unlock FREE delivery</span>
           )}
@@ -77,7 +77,7 @@ export default function CartPage() {
           <h3 className="font-extrabold text-slate-900">Order Summary</h3>
           <div className="mt-4 space-y-2.5 text-sm">
             <div className="flex justify-between text-slate-600"><span>Subtotal</span><b className="text-slate-900">{formatNaira(cartSubtotal)}</b></div>
-            <div className="flex justify-between text-slate-600"><span>Delivery (Owerri)</span><b className={shipping === 0 ? "text-emerald-600" : "text-slate-900"}>{shipping === 0 ? "FREE" : formatNaira(shipping)}</b></div>
+            <div className="flex justify-between text-slate-600"><span>Delivery</span><b className={shipping === 0 ? "text-emerald-600" : "text-slate-900"}>{shipping === 0 ? "FREE" : formatNaira(shipping)}</b></div>
             <div className="border-t border-dashed border-slate-200 pt-2.5">
               <div className="flex justify-between text-base font-black text-slate-900"><span>Total</span><span>{formatNaira(total)}</span></div>
             </div>
@@ -85,7 +85,7 @@ export default function CartPage() {
           <Link href="/checkout"><Button className="mt-5 w-full" size="lg">Proceed to Checkout <ArrowRight size={16} /></Button></Link>
           <Link href="/shop"><Button variant="outline" className="mt-2 w-full">Continue Shopping</Button></Link>
           <div className="mt-4 flex items-center justify-center gap-1.5 text-[11px] font-semibold text-slate-500">
-            <ShieldCheck size={13} className="text-emerald-500" /> Secure checkout • 7-day returns
+            <ShieldCheck size={13} className="text-emerald-500" /> Review your order at checkout
           </div>
         </div>
       </div>

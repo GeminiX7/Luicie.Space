@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import { MapPin, Phone, Mail, Globe, AtSign, Share2, Play, Send, Clock, Loader2 } from "lucide-react";
+import { MapPin, Phone, Globe, AtSign, Share2, Play, Send, Loader2 } from "lucide-react";
 import { SITE } from "@/lib/constants";
 import { useShop } from "@/context/ShopContext";
 import { StoreLogo } from "@/components/store/StoreLogo";
@@ -38,7 +38,7 @@ export function Newsletter() {
           <div>
             <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-brand-400">Stay Updated</p>
             <h3 className="mt-1 text-xl font-extrabold text-white sm:text-2xl">Subscribe to Our Newsletter</h3>
-            <p className="mt-1 text-sm text-slate-400">Get the latest deals, new arrivals, and exclusive Owerri store offers.</p>
+            <p className="mt-1 text-sm text-slate-400">Get updates on new accessories, useful gadgets and more.</p>
           </div>
         </div>
         <form onSubmit={submit} className="flex w-full max-w-md items-center overflow-hidden rounded-xl bg-white p-1.5">
@@ -60,12 +60,12 @@ export function SiteFooter() {
           <div className="flex items-center gap-2.5">
             <StoreLogo />
             <div className="leading-tight">
-              <p className="text-lg font-black text-white">Don<span className="text-brand-400">wise</span></p>
-              <p className="text-[10px] font-semibold uppercase tracking-wider text-slate-400">Power Your Potential</p>
+              <p className="text-lg font-black text-white">Luicie<span className="text-brand-400">.space</span></p>
+              <p className="text-[10px] font-semibold uppercase tracking-wider text-slate-400">{SITE.tagline}</p>
             </div>
           </div>
           <p className="mt-4 text-[13px] leading-relaxed text-slate-400">
-            Owerri&apos;s one-stop destination for premium computers, iPhones, PlayStation, gadgets & accessories. Quality, trust, and performance guaranteed.
+            Luicie.Space offers phone accessories, music boxes, headphones, ring lights, selfie sticks, wireless clippers, power banks and lots more. Need anything today? We&apos;re just one click away.
           </p>
           <div className="mt-4 flex gap-2">
             {[Globe, AtSign, Share2, Play].map((Icon, i) => (
@@ -74,13 +74,13 @@ export function SiteFooter() {
           </div>
         </div>
         <div>
-          <h4 className="mb-4 text-xs font-bold uppercase tracking-widest text-white">Our Stores</h4>
+          <h4 className="mb-4 text-xs font-bold uppercase tracking-widest text-white">Shop Accessories</h4>
           <ul className="space-y-2.5 text-[13px]">
-            <li><Link href="/shop?store=computers" className="hover:text-brand-400">💻 Computers Store</Link></li>
-            <li><Link href="/shop?store=iphone" className="hover:text-brand-400">📱 iPhone Store</Link></li>
-            <li><Link href="/shop?store=games" className="hover:text-brand-400">🎮 Games & PlayStation</Link></li>
-            <li><Link href="/shop?store=gadgets" className="hover:text-brand-400">⌚ Gadget Store</Link></li>
-            <li><Link href="/shop?store=accessories" className="hover:text-brand-400">🎧 Accessory Store</Link></li>
+            <li><Link href="/shop?store=accessories" className="hover:text-brand-400">📱 Phone Accessories</Link></li>
+            <li><Link href="/shop?store=accessories" className="hover:text-brand-400">🔊 Music Boxes</Link></li>
+            <li><Link href="/shop?store=accessories" className="hover:text-brand-400">🎧 Headphones</Link></li>
+            <li><Link href="/shop?store=accessories" className="hover:text-brand-400">💡 Ring Lights</Link></li>
+            <li><Link href="/shop?store=accessories" className="hover:text-brand-400">🔋 Power Banks & More</Link></li>
           </ul>
         </div>
         <div>
@@ -108,10 +108,8 @@ export function SiteFooter() {
         <div>
           <h4 className="mb-4 text-xs font-bold uppercase tracking-widest text-white">Contact Us</h4>
           <ul className="space-y-3 text-[13px]">
-            <li className="flex gap-2"><MapPin size={15} className="mt-0.5 shrink-0 text-brand-400" /> {SITE.address}<br /></li>
-            <li className="flex gap-2"><Phone size={15} className="mt-0.5 shrink-0 text-brand-400" /> {SITE.phone}</li>
-            <li className="flex gap-2"><Mail size={15} className="mt-0.5 shrink-0 text-brand-400" /> {SITE.email}</li>
-            <li className="flex gap-2"><Clock size={15} className="mt-0.5 shrink-0 text-brand-400" /> {SITE.hours}</li>
+            <li className="flex gap-2"><MapPin size={15} className="mt-0.5 shrink-0 text-brand-400" /> {SITE.address}</li>
+            <li className="flex gap-2"><Phone size={15} className="mt-0.5 shrink-0 text-brand-400" /> <a href="tel:+234813788842">{SITE.phone}</a></li>
           </ul>
           <div className="mt-4 flex flex-wrap gap-1.5">
             {["VISA", "Mastercard", "Verve", "Paystack", "Transfer"].map((p) => (
@@ -122,7 +120,7 @@ export function SiteFooter() {
       </div>
       <div className="border-t border-white/10">
         <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-2 px-4 py-4 text-xs text-slate-500 sm:flex-row">
-          <p>© 2026 Donwise Computers & iPhone Stores, Owerri. All Rights Reserved.</p>
+          <p>© 2026 Luicie.space. All Rights Reserved.</p>
           <p className="flex gap-4"><Link href="/about" className="hover:text-slate-300">Privacy Policy</Link><Link href="/about" className="hover:text-slate-300">Terms & Conditions</Link></p>
         </div>
       </div>

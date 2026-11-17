@@ -19,9 +19,12 @@ export async function POST(req: NextRequest) {
     if (!ok) {
       return NextResponse.json({ error: "Invalid email or password" }, { status: 401 });
     }
-    await setSessionCookie({ id: user.id, email: user.email, role: user.role, name: user.name });
+    await setSessionCookie({ id: user.id, email: user.email, role: user.role, name: user.name, authVersion: user.authVersion });
     return NextResponse.json({
-      user: { id: user.id, name: user.name, email: user.email, role: user.role, phone: user.phone, city: user.city },
+      user: {
+        id: user.id, name: user.name, email: user.email, role: user.role, phone: user.phone, city: user.city,
+        mustChangePassword: user.mustChangePassword,
+      },
     });
   } catch (e) {
     console.error("login error", e);

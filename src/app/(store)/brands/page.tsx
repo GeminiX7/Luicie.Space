@@ -20,7 +20,7 @@ export default function BrandsPage() {
   return (
     <div className="mx-auto max-w-7xl px-4 py-8">
       <h1 className="text-2xl font-black text-slate-900 sm:text-3xl">Shop by Brand</h1>
-      <p className="mt-1 text-sm text-slate-500">100% genuine products from the world&apos;s leading brands.</p>
+      <p className="mt-1 text-sm text-slate-500">Explore brands across phone accessories and everyday gadgets.</p>
       <div className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
         {brands.map((b) => (
           <Link key={b.id} href={`/shop?brand=${b.slug}`} className="group rounded-3xl border border-slate-100 bg-white p-6 text-center transition hover:-translate-y-1 hover:border-brand-200 hover:shadow-xl">

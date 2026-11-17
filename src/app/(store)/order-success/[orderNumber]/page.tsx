@@ -6,6 +6,7 @@ import Link from "next/link";
 import { CheckCircle2, Package, ArrowRight, Phone } from "lucide-react";
 import { Button, PageLoader } from "@/components/ui";
 import { formatNaira } from "@/lib/utils";
+import { SITE } from "@/lib/constants";
 
 export default function OrderSuccessPage() {
   const { orderNumber } = useParams<{ orderNumber: string }>();
@@ -43,7 +44,7 @@ export default function OrderSuccessPage() {
         <Link href="/shop"><Button size="lg" variant="outline">Continue Shopping</Button></Link>
       </div>
       <p className="mt-6 flex items-center justify-center gap-1.5 text-[13px] text-slate-500">
-        <Phone size={14} /> Questions? Call <b>+234 803 123 4567</b>
+        <Phone size={14} /> Questions? Call <a href="tel:+234813788842" className="font-bold">{SITE.phone}</a>
       </p>
     </div>
   );

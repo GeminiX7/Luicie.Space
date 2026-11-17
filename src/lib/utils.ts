@@ -61,5 +61,5 @@ export const STORE_META: Record<string, { label: string; tagline: string; color:
 
 export function productImage(p: { images?: string[] | null; name?: string }): string {
   if (p.images && p.images.length > 0) return p.images[0];
-  return `https://placehold.co/800x600/1e3a8a/ffffff?text=${encodeURIComponent(p.name || "Donwise")}`;
+  return `https://placehold.co/800x600/1e3a8a/ffffff?text=${encodeURIComponent(p.name || "Luicie.space")}`;
 }

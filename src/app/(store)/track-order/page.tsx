@@ -4,7 +4,7 @@ import { useState } from "react";
 import { PackageSearch, Check, Truck, Package, Home, Loader2 } from "lucide-react";
 import { Button, Input, Badge } from "@/components/ui";
 import { formatNaira, cn } from "@/lib/utils";
-import { STATUS_COLORS } from "@/lib/constants";
+import { SITE, STATUS_COLORS } from "@/lib/constants";
 
 type Order = {
   id: number; orderNumber: string; status: string; paymentStatus: string; total: number;
@@ -117,7 +117,7 @@ export default function TrackOrderPage() {
       )}
 
       <div className="mt-6 rounded-3xl bg-brand-50 p-5 text-center text-[13px] text-brand-900">
-        Need help? Call us on <b>+234 803 123 4567</b> or visit <b>12 Douglas Road, Owerri</b>.
+        Need help? Call <a href="tel:+234813788842" className="font-bold underline">{SITE.phone}</a>. We&apos;re based in {SITE.address}.
       </div>
     </div>
   );

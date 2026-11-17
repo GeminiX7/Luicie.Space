@@ -22,7 +22,7 @@ export default function DealsPage() {
         <div className="grid h-14 w-14 place-items-center rounded-2xl bg-white/20"><Flame size={28} /></div>
         <div>
           <h1 className="text-2xl font-black sm:text-3xl">Hot Deals 🔥</h1>
-          <p className="text-sm text-white/85">Discounted prices across all Donwise stores — while stock lasts!</p>
+          <p className="text-sm text-white/85">Discounted prices across all Luicie.space stores — while stock lasts!</p>
         </div>
       </div>
       {loading ? (

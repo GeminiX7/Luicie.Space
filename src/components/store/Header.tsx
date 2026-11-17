@@ -30,8 +30,8 @@ export function TopBar() {
         <p className="hidden items-center gap-1.5 text-slate-300 md:flex">
           <MapPin size={13} className="text-brand-400" /> {SITE.address}
         </p>
-        <p className="flex items-center gap-1.5 md:hidden"><MapPin size={13} className="text-brand-400" /> Owerri, Imo State</p>
-        <p className="hidden items-center gap-1.5 lg:flex"><Truck size={14} className="text-emerald-400" /> Free delivery in Owerri on orders over ₦250,000</p>
+        <p className="flex items-center gap-1.5 md:hidden"><MapPin size={13} className="text-brand-400" /> {SITE.address}</p>
+        <p className="hidden items-center gap-1.5 lg:flex"><Truck size={14} className="text-emerald-400" /> Premium quality • Always at your service</p>
         <div className="flex items-center gap-3 text-slate-300">
           <span className="hidden items-center gap-1.5 sm:flex"><Phone size={13} /> {SITE.phone}</span>
           <Link href="/track-order" className="hover:text-white">Track Order</Link>
@@ -106,8 +106,8 @@ export function SiteHeader() {
         <Link href="/" className="flex shrink-0 items-center gap-2.5">
           <StoreLogo className="shadow-lg shadow-brand-600/25" />
           <div className="leading-tight">
-            <p className="text-lg font-black tracking-tight text-ink-900 sm:text-xl">Don<span className="text-brand-600">wise</span></p>
-            <p className="hidden text-[10px] font-semibold uppercase tracking-wider text-slate-500 sm:block">Computers • iPhones • Games</p>
+            <p className="text-lg font-black tracking-tight text-ink-900 sm:text-xl">Luicie<span className="text-brand-600">.space</span></p>
+            <p className="hidden text-[10px] font-semibold uppercase tracking-wider text-slate-500 sm:block">{SITE.tagline}</p>
           </div>
         </Link>
 
@@ -211,7 +211,7 @@ export function SiteHeader() {
             />
           </div>
           <div className="ml-auto hidden shrink-0 items-center gap-1.5 py-2 text-xs font-semibold text-emerald-700 xl:flex">
-            <BadgeCheck size={15} /> 100% Genuine
+            <BadgeCheck size={15} /> Premium Quality
           </div>
         </div>
       </nav>

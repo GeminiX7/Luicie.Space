@@ -40,7 +40,7 @@ export default function AdminDashboard() {
       <div className="mb-6 flex flex-wrap items-end justify-between gap-3">
         <div>
           <h1 className="text-2xl font-black text-slate-900">Dashboard Overview</h1>
-          <p className="text-sm text-slate-500">Welcome back! Here&apos;s what&apos;s happening at Donwise today.</p>
+          <p className="text-sm text-slate-500">Welcome back! Here&apos;s what&apos;s happening at Luicie.space today.</p>
         </div>
         <Link href="/admin/products" className="flex h-10 items-center gap-2 rounded-xl bg-ink-900 px-4 text-[13px] font-bold text-white">
           <Package size={15} /> Manage Products

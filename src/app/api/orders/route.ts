@@ -77,7 +77,7 @@ export async function POST(req: NextRequest) {
       paymentMethod: paymentMethod || "pay_on_pickup",
       subtotal, shippingFee, discount: 0, total,
       customerName, customerEmail, customerPhone: customerPhone || null,
-      shippingAddress: shippingAddress || null, shippingCity: shippingCity || "Owerri", shippingState: shippingState || "Imo State",
+      shippingAddress: shippingAddress || null, shippingCity: shippingCity || "Enugu", shippingState: shippingState || "Enugu",
       notes: notes || null, trackingNumber: generateTrackingNumber(),
     }).returning();
 

@@ -1,12 +1,13 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Users, Trash2, Search } from "lucide-react";
+import { Users, Trash2, Search, KeyRound, Copy } from "lucide-react";
 import { Button, Modal, EmptyState, PageLoader } from "@/components/ui";
 import { useShop } from "@/context/ShopContext";
 import { formatNaira, timeAgo } from "@/lib/utils";
 
 type Customer = { id: number; name: string; email: string; phone?: string | null; city?: string | null; role: string; createdAt: string; totalSpent: number; orderCount: number };
+type TemporaryPassword = { buyerName: string; buyerEmail: string; value: string };
 
 export default function AdminCustomersPage() {
   const { toast } = useShop();
@@ -14,6 +15,8 @@ export default function AdminCustomersPage() {
   const [loading, setLoading] = useState(true);
   const [q, setQ] = useState("");
   const [delId, setDelId] = useState<number | null>(null);
+  const [resettingId, setResettingId] = useState<number | null>(null);
+  const [temporaryPassword, setTemporaryPassword] = useState<TemporaryPassword | null>(null);
 
   useEffect(() => {
     fetch("/api/customers").then((r) => r.json()).then((j) => setCustomers(j.customers || [])).finally(() => setLoading(false));
@@ -32,6 +35,37 @@ export default function AdminCustomersPage() {
     } catch {
       setCustomers(prev);
       toast("Delete failed", { type: "error" });
+    }
+  };
+
+  const resetPassword = async (customer: Customer) => {
+    setResettingId(customer.id);
+    try {
+      const response = await fetch(`/api/customers/${customer.id}/password`, { method: "POST" });
+      const result = await response.json();
+      if (!response.ok) throw new Error(result.error || "Password reset failed");
+      setTemporaryPassword({
+        buyerName: result.buyer.name,
+        buyerEmail: result.buyer.email,
+        value: result.temporaryPassword,
+      });
+    } catch (error) {
+      toast("Password reset failed", {
+        message: error instanceof Error ? error.message : "Please try again.",
+        type: "error",
+      });
+    } finally {
+      setResettingId(null);
+    }
+  };
+
+  const copyTemporaryPassword = async () => {
+    if (!temporaryPassword) return;
+    try {
+      await navigator.clipboard.writeText(temporaryPassword.value);
+      toast("Copied", { message: "Temporary password copied to clipboard.", type: "success" });
+    } catch {
+      toast("Copy failed", { message: "Select and copy the password manually.", type: "error" });
     }
   };
 
@@ -58,10 +92,22 @@ export default function AdminCustomersPage() {
                 <div className="min-w-0 flex-1">
                   <p className="truncate font-bold text-slate-900">{c.name}</p>
                   <p className="truncate text-xs text-slate-500">{c.email}</p>
-                  <p className="text-xs text-slate-500">{c.phone || "No phone"} • {c.city || "Owerri"}</p>
+                  <p className="text-xs text-slate-500">{c.phone || "No phone"} • {c.city || "Enugu"}</p>
                 </div>
+                {c.role === "customer" && (
+                  <button
+                    type="button"
+                    title="Issue temporary password"
+                    aria-label={`Reset password for ${c.name}`}
+                    disabled={resettingId === c.id}
+                    onClick={() => resetPassword(c)}
+                    className="grid h-8 w-8 place-items-center rounded-lg bg-brand-50 text-brand-700 disabled:opacity-50"
+                  >
+                    <KeyRound size={14} />
+                  </button>
+                )}
                 {c.role !== "admin" && (
-                  <button onClick={() => setDelId(c.id)} className="grid h-8 w-8 place-items-center rounded-lg bg-red-50 text-red-500"><Trash2 size={14} /></button>
+                  <button type="button" aria-label={`Remove ${c.name}`} onClick={() => setDelId(c.id)} className="grid h-8 w-8 place-items-center rounded-lg bg-red-50 text-red-500"><Trash2 size={14} /></button>
                 )}
               </div>
               <div className="mt-4 grid grid-cols-3 gap-2 text-center">
@@ -89,6 +135,21 @@ export default function AdminCustomersPage() {
           <Button variant="outline" className="flex-1" onClick={() => setDelId(null)}>Cancel</Button>
           <Button variant="danger" className="flex-1" onClick={doDelete}>Remove</Button>
         </div>
+      </Modal>
+      <Modal open={!!temporaryPassword} onClose={() => setTemporaryPassword(null)} title="Temporary Password">
+        {temporaryPassword && (
+          <>
+            <p className="text-sm text-slate-600">
+              Share this temporary password with {temporaryPassword.buyerName} ({temporaryPassword.buyerEmail}) directly.
+              They must change it when they next sign in. This password is shown only once.
+            </p>
+            <p className="mt-4 break-all rounded-xl bg-slate-100 p-3 font-mono text-sm font-bold text-slate-900">{temporaryPassword.value}</p>
+            <div className="mt-5 flex justify-end gap-2">
+              <Button variant="outline" onClick={() => setTemporaryPassword(null)}>Close</Button>
+              <Button onClick={copyTemporaryPassword}><Copy size={14} /> Copy Password</Button>
+            </div>
+          </>
+        )}
       </Modal>
     </div>
   );

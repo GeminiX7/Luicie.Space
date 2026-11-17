@@ -16,6 +16,8 @@ export const users = pgTable("users", {
   email: text("email").notNull().unique(),
   passwordHash: text("password_hash").notNull(),
   role: text("role").notNull().default("customer"), // admin | staff | customer
+  mustChangePassword: boolean("must_change_password").notNull().default(false),
+  authVersion: integer("auth_version").notNull().default(0),
   phone: text("phone"),
   address: text("address"),
   city: text("city").default("Owerri"),

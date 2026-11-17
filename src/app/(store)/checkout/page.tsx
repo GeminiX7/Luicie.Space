@@ -13,7 +13,7 @@ import { ShoppingCart } from "lucide-react";
 const PAYMENTS = [
   { id: "pay_on_pickup", label: "Pay on Pickup / Delivery", desc: "Cash or transfer when you receive it", icon: Banknote },
   { id: "bank_transfer", label: "Bank Transfer", desc: "We'll send account details after ordering", icon: CreditCard },
-  { id: "in_store", label: "Pay In-Store", desc: "Reserve online, pay at Douglas Road store", icon: StoreIcon },
+  { id: "in_store", label: "Pay In-Store", desc: "Reserve online, pay in Enugu", icon: StoreIcon },
 ];
 
 export default function CheckoutPage() {
@@ -25,8 +25,8 @@ export default function CheckoutPage() {
     customerEmail: user?.email || "",
     customerPhone: user?.phone || "",
     shippingAddress: "",
-    shippingCity: "Owerri",
-    shippingState: "Imo State",
+    shippingCity: "Enugu",
+    shippingState: "Enugu",
     notes: "",
     paymentMethod: "pay_on_pickup",
   });
@@ -78,7 +78,7 @@ export default function CheckoutPage() {
             <h3 className="mb-4 flex items-center gap-2 font-extrabold text-slate-900"><Truck size={18} className="text-brand-600" /> Contact & Delivery Details</h3>
             <div className="grid gap-4 sm:grid-cols-2">
               <Input label="Full Name *" placeholder="e.g. Chiamaka Okafor" value={form.customerName} onChange={(e) => set("customerName", e.target.value)} />
-              <Input label="Phone Number *" placeholder="e.g. 0803 123 4567" value={form.customerPhone} onChange={(e) => set("customerPhone", e.target.value)} />
+              <Input label="Phone Number *" placeholder="e.g. 0813788842" value={form.customerPhone} onChange={(e) => set("customerPhone", e.target.value)} />
               <div className="sm:col-span-2"><Input label="Email Address *" type="email" placeholder="you@example.com" value={form.customerEmail} onChange={(e) => set("customerEmail", e.target.value)} /></div>
               <div className="sm:col-span-2"><Input label="Street Address" placeholder="House no, street, area" value={form.shippingAddress} onChange={(e) => set("shippingAddress", e.target.value)} /></div>
               <Input label="City" value={form.shippingCity} onChange={(e) => set("shippingCity", e.target.value)} />
@@ -125,7 +125,7 @@ export default function CheckoutPage() {
             <div className="flex justify-between text-lg font-black"><span>Total</span><span className="text-brand-700">{formatNaira(total)}</span></div>
           </div>
           <Button type="submit" loading={placing} size="lg" className="mt-5 w-full">Place Order • {formatNaira(total)}</Button>
-          <p className="mt-3 flex items-center justify-center gap-1.5 text-[11px] font-semibold text-slate-500"><ShieldCheck size={13} className="text-emerald-500" /> 100% genuine • 7-day returns • 1yr warranty</p>
+          <p className="mt-3 flex items-center justify-center gap-1.5 text-[11px] font-semibold text-slate-500"><ShieldCheck size={13} className="text-emerald-500" /> Review your order before placing it.</p>
         </div>
       </form>
     </div>

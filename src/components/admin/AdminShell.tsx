@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
 import {
-  LayoutDashboard, Package, FolderTree, Award, ShoppingBag, Users, Star,
+  LayoutDashboard, Package, FolderTree, Award, ShoppingBag, Users, Star, KeyRound,
   Store, Menu, X, LogOut, Bell, Search,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -18,6 +18,7 @@ const LINKS = [
   { href: "/admin/orders", label: "Orders", icon: ShoppingBag },
   { href: "/admin/customers", label: "Customers", icon: Users },
   { href: "/admin/reviews", label: "Reviews", icon: Star },
+  { href: "/change-password", label: "Change Password", icon: KeyRound },
 ];
 
 export function AdminShell({ children, user }: { children: React.ReactNode; user: { name: string; email: string; role: string } }) {
@@ -35,7 +36,7 @@ export function AdminShell({ children, user }: { children: React.ReactNode; user
       <Link href="/admin" className="flex items-center gap-2.5 px-5 pb-6 pt-6" onClick={() => setOpen(false)}>
         <StoreLogo className="shadow-lg" />
         <div className="leading-tight">
-          <p className="text-lg font-black text-white">Don<span className="text-brand-400">wise</span></p>
+          <p className="text-lg font-black text-white">Luicie<span className="text-brand-400">.Space</span></p>
           <p className="text-[10px] font-bold uppercase tracking-widest text-slate-400">Admin Panel</p>
         </div>
       </Link>

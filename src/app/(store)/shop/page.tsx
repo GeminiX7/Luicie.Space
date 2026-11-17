@@ -130,7 +130,7 @@ function ShopInner() {
   return (
     <div className="mx-auto max-w-7xl px-4 py-8">
       <div className="mb-6">
-        <p className="text-xs font-semibold uppercase tracking-widest text-brand-600">Donwise Stores • Owerri</p>
+        <p className="text-xs font-semibold uppercase tracking-widest text-brand-600">Luicie.Space • Enugu, Nigeria</p>
         <h1 className="mt-1 text-2xl font-black text-slate-900 sm:text-3xl">{title}</h1>
         <p className="mt-1 text-sm text-slate-500">{loading ? "Searching products..." : `${total} product${total === 1 ? "" : "s"} found`}</p>
       </div>

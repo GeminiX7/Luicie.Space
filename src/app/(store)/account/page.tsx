@@ -3,11 +3,11 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { User, Package, Heart, LogOut, MapPin } from "lucide-react";
+import { User, Package, Heart, LogOut, MapPin, Phone, KeyRound } from "lucide-react";
 import { useShop } from "@/context/ShopContext";
 import { Button, PageLoader, EmptyState } from "@/components/ui";
 import { formatNaira, timeAgo, cn } from "@/lib/utils";
-import { STATUS_COLORS } from "@/lib/constants";
+import { SITE, STATUS_COLORS } from "@/lib/constants";
 
 type Order = { id: number; orderNumber: string; status: string; paymentStatus: string; total: number; createdAt: string; items: { productName: string; quantity: number }[] };
 
@@ -35,14 +35,17 @@ export default function AccountPage() {
         <div className="flex items-center gap-4">
           <div className="grid h-16 w-16 place-items-center rounded-2xl bg-brand-600 text-2xl font-black">{user.name[0]}</div>
           <div>
-            <h1 className="text-xl font-black sm:text-2xl">Hello, {user.name} 👋</h1>
-            <p className="text-sm text-slate-300">{user.email} • {user.city || "Owerri"}</p>
+            <h1 className="text-xl font-black sm:text-2xl">Welcome to Luicie.Space, {user.name} 👋</h1>
+            <p className="text-sm text-slate-300">{user.email} • {SITE.address}</p>
           </div>
         </div>
-        <Button variant="secondary" onClick={logout}><LogOut size={15} /> Sign Out</Button>
+        <div className="flex flex-wrap gap-2">
+          <Link href="/change-password"><Button variant="secondary"><KeyRound size={15} /> Change Password</Button></Link>
+          <Button variant="secondary" onClick={logout}><LogOut size={15} /> Sign Out</Button>
+        </div>
       </div>
 
-      <div className="mt-6 grid gap-4 sm:grid-cols-3">
+      <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         <div className="rounded-2xl border border-slate-100 bg-white p-5">
           <div className="flex items-center gap-2 text-slate-500"><Package size={17} /><span className="text-xs font-bold uppercase">Total Orders</span></div>
           <p className="mt-1 text-3xl font-black">{orders.length}</p>
@@ -52,12 +55,16 @@ export default function AccountPage() {
           <p className="mt-1 text-3xl font-black">{wishlist.length}</p>
         </div>
         <div className="rounded-2xl border border-slate-100 bg-white p-5">
-          <div className="flex items-center gap-2 text-slate-500"><MapPin size={17} /><span className="text-xs font-bold uppercase">City</span></div>
-          <p className="mt-1 text-2xl font-black">{user.city || "Owerri"}</p>
+          <div className="flex items-center gap-2 text-slate-500"><MapPin size={17} /><span className="text-xs font-bold uppercase">Store Location</span></div>
+          <p className="mt-1 text-2xl font-black">{SITE.address}</p>
+        </div>
+        <div className="rounded-2xl border border-slate-100 bg-white p-5">
+          <div className="flex items-center gap-2 text-slate-500"><Phone size={17} /><span className="text-xs font-bold uppercase">Contact</span></div>
+          <a href="tel:+234813788842" className="mt-1 inline-block text-2xl font-black text-brand-700 hover:underline">{SITE.phone}</a>
         </div>
       </div>
 
-      <h2 className="mb-4 mt-8 text-lg font-extrabold text-slate-900">My Orders</h2>
+      <h2 className="mb-4 mt-8 text-lg font-extrabold text-slate-900">Your Luicie.Space Orders</h2>
       {loading ? (
         <PageLoader message="Loading orders..." />
       ) : orders.length === 0 ? (

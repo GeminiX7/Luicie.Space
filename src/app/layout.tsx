@@ -5,14 +5,14 @@ import { ShopProvider } from "@/context/ShopContext";
 import { Toasts } from "@/components/ui";
 
 export const metadata: Metadata = {
-  title: "Donwise Computers & iPhone Stores | Games, Gadgets & Accessories in Owerri",
+  title: "Luicie.Space | Premium Quality Accessories",
   description:
-    "Owerri's No.1 plug for computers, iPhones, PlayStation & games, gadgets and accessories. 100% genuine products, best prices, fast delivery in Imo State.",
+    "Shop phone accessories, music boxes, headphones, ring lights, selfie sticks, wireless clippers, power banks and more at Luicie.Space. Always At Your Service.",
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body className="bg-[#f4f6fb] text-slate-900 antialiased">
         <ShopProvider>
           {children}

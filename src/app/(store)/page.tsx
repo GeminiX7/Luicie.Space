@@ -39,7 +39,7 @@ export default async function HomePage() {
       <section className="mx-auto max-w-7xl px-4 pb-10">
         <SectionTitle
           title="Popular Products"
-          subtitle="Best sellers across all Donwise stores in Owerri"
+          subtitle="Everyday accessories and useful gadgets from Luicie.Space"
           action={<Link href="/shop" className="flex items-center gap-1 text-xs font-bold uppercase tracking-wide text-brand-600 hover:text-brand-800">View All Products <ArrowRight size={14} /></Link>}
         />
         <div className="grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-3 lg:grid-cols-5">
@@ -54,7 +54,7 @@ export default async function HomePage() {
         <div className="mx-auto max-w-7xl px-4 py-10">
           <SectionTitle
             title="New Arrivals"
-            subtitle="Fresh stock — just landed at our Owerri stores"
+            subtitle="Discover new accessories and handy gadgets"
             action={<Link href="/shop?sort=newest" className="flex items-center gap-1 text-xs font-bold uppercase tracking-wide text-brand-600 hover:text-brand-800">View All <ArrowRight size={14} /></Link>}
           />
           <div className="grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-3 lg:grid-cols-5">
@@ -87,17 +87,17 @@ export default async function HomePage() {
           <div>
             <p className="text-[11px] font-bold uppercase tracking-[0.25em] text-brand-100">Visit Our Stores</p>
             <h3 className="mt-2 text-2xl font-black sm:text-3xl">Come, See & Test Before You Buy</h3>
-            <p className="mt-2 text-sm text-brand-50">12 Douglas Road, Owerri • Shop B14 Somachi Plaza, Ikenegbu. Open Mon–Sat, 8am–8pm.</p>
+            <p className="mt-2 text-sm text-brand-50">Based in Enugu, Nigeria. Phone accessories, music boxes, headphones, ring lights, selfie sticks, wireless clippers, power banks and more.</p>
             <div className="mt-5 flex flex-wrap gap-3">
-              <Link href="/contact" className="rounded-xl bg-white px-6 py-3 text-xs font-black uppercase tracking-wide text-brand-700 hover:bg-brand-50">Get Directions</Link>
-              <a href="tel:+2348031234567" className="rounded-xl border border-white/40 px-6 py-3 text-xs font-black uppercase tracking-wide text-white hover:bg-white/10">Call: 0803 123 4567</a>
+              <Link href="/shop?store=accessories" className="rounded-xl bg-white px-6 py-3 text-xs font-black uppercase tracking-wide text-brand-700 hover:bg-brand-50">Shop Accessories</Link>
+              <a href="tel:+234813788842" className="rounded-xl border border-white/40 px-6 py-3 text-xs font-black uppercase tracking-wide text-white hover:bg-white/10">Call: 0813788842</a>
             </div>
           </div>
           <div className="mt-6 grid grid-cols-3 gap-3 lg:mt-0">
             {[
-              { t: "5+", s: "Stores in Owerri" },
-              { t: "12k+", s: "Happy Customers" },
-              { t: "4.9★", s: "Google Rating" },
+              { t: "Premium", s: "Quality" },
+              { t: "Enugu", s: "Nigeria" },
+              { t: "Always", s: "At Your Service" },
             ].map((x) => (
               <div key={x.s} className="rounded-2xl bg-white/10 p-4 text-center ring-1 ring-white/20 backdrop-blur">
                 <p className="text-2xl font-black">{x.t}</p>

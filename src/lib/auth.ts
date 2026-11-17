@@ -5,9 +5,12 @@ import { db } from "@/db";
 import { users } from "@/db/schema";
 import { eq } from "drizzle-orm";
 
-const SECRET = new TextEncoder().encode(
-  process.env.AUTH_SECRET || "donwise-computers-owerri-super-secret-key-2026"
-);
+const authSecret = process.env.AUTH_SECRET;
+if (!authSecret || Buffer.byteLength(authSecret, "utf8") < 32) {
+  throw new Error("AUTH_SECRET must be set to a random value of at least 32 bytes");
+}
+
+const SECRET = new TextEncoder().encode(authSecret);
 export const AUTH_COOKIE = "donwise_session";
 const MAX_AGE = 60 * 60 * 24 * 7; // 7 days
 
@@ -20,7 +23,9 @@ export async function verifyPassword(password: string, hash: string): Promise<bo
   return bcrypt.compare(password, hash);
 }
 
-export async function signToken(payload: { id: number; email: string; role: string; name: string }) {
+type SessionPayload = { id: number; email: string; role: string; name: string; authVersion: number };
+
+export async function signToken(payload: SessionPayload) {
   return new SignJWT(payload)
     .setProtectedHeader({ alg: "HS256" })
     .setIssuedAt()
@@ -31,13 +36,14 @@ export async function signToken(payload: { id: number; email: string; role: stri
 export async function verifyToken(token: string) {
   try {
     const { payload } = await jwtVerify(token, SECRET);
-    return payload as { id: number; email: string; role: string; name: string };
+    if (typeof payload.authVersion !== "number" || !Number.isInteger(payload.authVersion)) return null;
+    return payload as SessionPayload;
   } catch {
     return null;
   }
 }
 
-export async function setSessionCookie(payload: { id: number; email: string; role: string; name: string }) {
+export async function setSessionCookie(payload: SessionPayload) {
   const token = await signToken(payload);
   const store = await cookies();
   store.set(AUTH_COOKIE, token, {
@@ -55,7 +61,7 @@ export async function clearSessionCookie() {
   store.delete(AUTH_COOKIE);
 }
 
-export async function getSessionUser() {
+export async function getSessionUser(options: { allowPasswordChange?: boolean } = {}) {
   const store = await cookies();
   const token = store.get(AUTH_COOKIE)?.value;
   if (!token) return null;
@@ -64,7 +70,12 @@ export async function getSessionUser() {
   const rows = await db.select().from(users).where(eq(users.id, payload.id)).limit(1);
   if (rows.length === 0) return null;
   const u = rows[0];
-  return { id: u.id, name: u.name, email: u.email, role: u.role, phone: u.phone, city: u.city };
+  if (payload.authVersion !== u.authVersion) return null;
+  if (u.mustChangePassword && !options.allowPasswordChange) return null;
+  return {
+    id: u.id, name: u.name, email: u.email, role: u.role, phone: u.phone, city: u.city,
+    mustChangePassword: u.mustChangePassword,
+  };
 }
 
 export async function requireAdmin() {

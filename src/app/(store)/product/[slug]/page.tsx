@@ -8,6 +8,7 @@ import { useShop, ProductLite } from "@/context/ShopContext";
 import { Price, Stars, Badge, Button, PageLoader, EmptyState, Textarea, Input } from "@/components/ui";
 import { ProductCard, CardProduct } from "@/components/store/ProductCard";
 import { discountPercent, cn, formatNaira } from "@/lib/utils";
+import { SITE } from "@/lib/constants";
 
 type FullProduct = CardProduct & {
   description?: string | null; specs?: Record<string, string>; features?: string[]; tags?: string[];
@@ -166,13 +167,13 @@ export default function ProductDetailPage() {
 
           {/* Trust */}
           <div className="mt-5 grid grid-cols-1 gap-2.5 rounded-2xl border border-slate-100 bg-white p-4 text-[13px] sm:grid-cols-3">
-            <div className="flex items-center gap-2"><Truck size={18} className="text-brand-600" /><span><b>Free delivery</b><br /><span className="text-xs text-slate-500">Owerri, orders ₦250k+</span></span></div>
-            <div className="flex items-center gap-2"><ShieldCheck size={18} className="text-emerald-600" /><span><b>1yr warranty</b><br /><span className="text-xs text-slate-500">100% genuine</span></span></div>
-            <div className="flex items-center gap-2"><RotateCcw size={18} className="text-amber-600" /><span><b>7-day returns</b><br /><span className="text-xs text-slate-500">No questions asked</span></span></div>
+            <div className="flex items-center gap-2"><Truck size={18} className="text-brand-600" /><span><b>Delivery options</b><br /><span className="text-xs text-slate-500">See details at checkout</span></span></div>
+            <div className="flex items-center gap-2"><ShieldCheck size={18} className="text-emerald-600" /><span><b>Premium Quality</b><br /><span className="text-xs text-slate-500">Always at your service</span></span></div>
+            <div className="flex items-center gap-2"><RotateCcw size={18} className="text-amber-600" /><span><b>Luicie.Space</b><br /><span className="text-xs text-slate-500">{SITE.address}</span></span></div>
           </div>
           <div className="mt-3 flex items-center gap-2 rounded-2xl bg-brand-50 p-3.5 text-[13px] text-brand-900">
             <Store size={17} className="shrink-0" />
-            <span>Available for pickup at <b>12 Douglas Road, Owerri</b> — open Mon–Sat, 8am–8pm.</span>
+            <span>Need anything today? Call <a href="tel:+234813788842" className="font-bold underline">{SITE.phone}</a>.</span>
           </div>
         </div>
       </div>

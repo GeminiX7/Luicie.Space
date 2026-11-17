@@ -1,6 +1,6 @@
 import { db } from "@/db";
 import { users, categories, brands, products, orders, orderItems, reviews, newsletters } from "@/db/schema";
-import { seedCategories, seedBrands, seedProducts, seedUsers, seedReviews, IMG } from "./seed-data";
+import { seedCategories, seedBrands, seedProducts, seedReviews, IMG } from "./seed-data";
 import { hashPassword } from "@/lib/auth";
 import { generateOrderNumber, generateTrackingNumber } from "@/lib/utils";
 import { eq, sql } from "drizzle-orm";
@@ -13,20 +13,24 @@ export async function seedDatabase() {
     return { seeded: false, message: "Already seeded", products: count };
   }
 
-  // Users
-  const userIds: Record<string, number> = {};
-  for (const u of seedUsers) {
-    const [row] = await db.insert(users).values({
-      name: u.name,
-      email: u.email,
-      passwordHash: await hashPassword(u.password),
-      role: u.role,
-      phone: u.phone,
-      address: u.address,
-      city: u.city,
-      state: u.state,
-    }).returning({ id: users.id });
-    userIds[u.email] = row.id;
+  const adminEmail = process.env.SEED_ADMIN_EMAIL?.trim().toLowerCase();
+  const adminPassword = process.env.SEED_ADMIN_PASSWORD;
+  if (!adminEmail || !adminPassword || adminPassword.length < 16) {
+    throw new Error("Set SEED_ADMIN_EMAIL and a SEED_ADMIN_PASSWORD of at least 16 characters before seeding");
+  }
+  const existingAdmin = await db.select({ id: users.id, role: users.role }).from(users).where(eq(users.email, adminEmail)).limit(1);
+  if (existingAdmin[0] && existingAdmin[0].role !== "admin") {
+    throw new Error("SEED_ADMIN_EMAIL already belongs to a non-admin account");
+  }
+  if (!existingAdmin[0]) {
+    await db.insert(users).values({
+      name: process.env.SEED_ADMIN_NAME?.trim() || "Luicie.Space Admin",
+      email: adminEmail,
+      passwordHash: await hashPassword(adminPassword),
+      role: "admin",
+      city: "Enugu",
+      state: "Enugu",
+    });
   }
 
   // Categories
@@ -107,7 +111,6 @@ export async function seedDatabase() {
     created.setDate(created.getDate() - o.days);
     const [ord] = await db.insert(orders).values({
       orderNumber: orderNum,
-      userId: userIds[o.email] ?? null,
       status: o.status,
       paymentStatus: o.pay,
       paymentMethod: o.pay === "paid" ? "bank_transfer" : "pay_on_pickup",
